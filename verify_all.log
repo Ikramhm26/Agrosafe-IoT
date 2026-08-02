@@ -1,0 +1,487 @@
+
+svl clean info: [persistent] systeme_irrigation_min.bcg
+
+property P1
+ | P1 — Pas irrigation si cuve vide
+
+svl clean info: [temporary] svl000_display.txt
+
+svl clean info: [temporary] svl001_formula_inline
+
+svl clean info: [temporary] svl001_formula_inline.mcl
+
+svl clean info: [temporary] svl001_formula_inline.xm
+
+"svl001_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_CUVE !VIDE" . true* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl001_formula_inline.mcl"
+
+verify_all.svl:6: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:5" -dfs   "svl001_formula_inline.mcl"
+
+svl clean info: [temporary] svl000_stdout
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:5 -dfs svl001_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P2
+ | P2 — Pas irrigation si fuite cuve
+
+svl clean info: [temporary] svl002_formula_inline
+
+svl clean info: [temporary] svl002_formula_inline.mcl
+
+svl clean info: [temporary] svl002_formula_inline.xm
+
+"svl002_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_CUVE !FUITE" . true* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl002_formula_inline.mcl"
+
+verify_all.svl:15: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:14" -dfs   "svl002_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:14 -dfs svl002_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P3
+ | P3 — Pas irrigation si temp haute
+
+svl clean info: [temporary] svl003_formula_inline
+
+svl clean info: [temporary] svl003_formula_inline.mcl
+
+svl clean info: [temporary] svl003_formula_inline.xm
+
+"svl003_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_TEMP !HAUTE" . true* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl003_formula_inline.mcl"
+
+verify_all.svl:24: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:23" -dfs   "svl003_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:23 -dfs svl003_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P4
+ | P4 — Pas irrigation si pluie
+
+svl clean info: [temporary] svl004_formula_inline
+
+svl clean info: [temporary] svl004_formula_inline.mcl
+
+svl clean info: [temporary] svl004_formula_inline.xm
+
+"svl004_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_PLUIE !PLUIE" . true* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl004_formula_inline.mcl"
+
+verify_all.svl:33: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:32" -dfs   "svl004_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:32 -dfs svl004_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P5
+ | P5 — Pas irrigation si fuite reseau
+
+svl clean info: [temporary] svl005_formula_inline
+
+svl clean info: [temporary] svl005_formula_inline.mcl
+
+svl clean info: [temporary] svl005_formula_inline.xm
+
+"svl005_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_PRESSION !FUITE_RESEAU" . true* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl005_formula_inline.mcl"
+
+verify_all.svl:42: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:41" -dfs   "svl005_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:41 -dfs svl005_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P6
+ | P6 — Pas irrigation si LoRa perdu
+
+svl clean info: [temporary] svl006_formula_inline
+
+svl clean info: [temporary] svl006_formula_inline.mcl
+
+svl clean info: [temporary] svl006_formula_inline.xm
+
+"svl006_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_LORA !PERDU" . true* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl006_formula_inline.mcl"
+
+verify_all.svl:51: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:50" -dfs   "svl006_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:50 -dfs svl006_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P7
+ | P7 — Pas irrigation si capteur derive
+
+svl clean info: [temporary] svl007_formula_inline
+
+svl clean info: [temporary] svl007_formula_inline.mcl
+
+svl clean info: [temporary] svl007_formula_inline.xm
+
+"svl007_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_DELTA !DERIVE" . true* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl007_formula_inline.mcl"
+
+verify_all.svl:60: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:59" -dfs   "svl007_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:59 -dfs svl007_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P8
+ | P8 — Blocage immediat apres cuve vide
+
+svl clean info: [temporary] svl008_formula_inline
+
+svl clean info: [temporary] svl008_formula_inline.mcl
+
+svl clean info: [temporary] svl008_formula_inline.xm
+
+"svl008_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_CUVE !VIDE" . (not "CHECK_SAFETY !AUTORISE")* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl008_formula_inline.mcl"
+
+verify_all.svl:69: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:68" -dfs   "svl008_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:68 -dfs svl008_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P9
+ | P9 — Blocage immediat apres temp haute
+
+svl clean info: [temporary] svl009_formula_inline
+
+svl clean info: [temporary] svl009_formula_inline.mcl
+
+svl clean info: [temporary] svl009_formula_inline.xm
+
+"svl009_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_TEMP !HAUTE" . (not "CHECK_SAFETY !AUTORISE")* . "CHECK_SAFETY !AUTORISE" ] false
+
+"systeme_irrigation_min.bcg" |= "svl009_formula_inline.mcl"
+
+verify_all.svl:78: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:77" -dfs   "svl009_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:77 -dfs svl009_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P10
+ | P10 — Absence de deadlock
+
+svl clean info: [temporary] svl010_formula_inline
+
+svl clean info: [temporary] svl010_formula_inline.mcl
+
+svl clean info: [temporary] svl010_formula_inline.xm
+
+"svl010_formula_inline.mcl" =
+    library standard.mcl end_library
+    nu X . (< true > true and [ true ] X)
+
+"systeme_irrigation_min.bcg" |= "svl010_formula_inline.mcl"
+
+verify_all.svl:87: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:86" -dfs   "svl010_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:86 -dfs svl010_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P11
+ | P11 — Sol normal permet irrigation
+
+svl clean info: [temporary] svl011_formula_inline
+
+svl clean info: [temporary] svl011_formula_inline.mcl
+
+svl clean info: [temporary] svl011_formula_inline.xm
+
+"svl011_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_SOL !NORMAL" ] < true* . "DECIDE !IRRIGUER" > true
+
+"systeme_irrigation_min.bcg" |= "svl011_formula_inline.mcl"
+
+verify_all.svl:96: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:95" -dfs   "svl011_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:95 -dfs svl011_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P12
+ | P12 — Sol critique permet irrigation
+
+svl clean info: [temporary] svl012_formula_inline
+
+svl clean info: [temporary] svl012_formula_inline.mcl
+
+svl clean info: [temporary] svl012_formula_inline.xm
+
+"svl012_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "READ_SOL !CRITIQUE" ] < true* . "DECIDE !IRRIGUER" > true
+
+"systeme_irrigation_min.bcg" |= "svl012_formula_inline.mcl"
+
+verify_all.svl:105: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:104" -dfs   "svl012_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:104 -dfs svl012_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P13
+ | P13 — DR depasse implique emission
+
+svl clean info: [temporary] svl013_formula_inline
+
+svl clean info: [temporary] svl013_formula_inline.mcl
+
+svl clean info: [temporary] svl013_formula_inline.xm
+
+"svl013_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "RECV_BILAN !DR_DEPASSE" ] < true* . "EMIT_DECISION !DR_DEPASSE" > true
+
+"systeme_irrigation_min.bcg" |= "svl013_formula_inline.mcl"
+
+verify_all.svl:114: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:113" -dfs   "svl013_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:113 -dfs svl013_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P14
+ | P14 — DR ok implique emission ok
+
+svl clean info: [temporary] svl014_formula_inline
+
+svl clean info: [temporary] svl014_formula_inline.mcl
+
+svl clean info: [temporary] svl014_formula_inline.xm
+
+"svl014_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "RECV_BILAN !DR_OK" ] < true* . "EMIT_DECISION !DR_OK" > true
+
+"systeme_irrigation_min.bcg" |= "svl014_formula_inline.mcl"
+
+verify_all.svl:123: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:122" -dfs   "svl014_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:122 -dfs svl014_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P15
+ | P15 — Bloque implique log alerte
+
+svl clean info: [temporary] svl015_formula_inline
+
+svl clean info: [temporary] svl015_formula_inline.mcl
+
+svl clean info: [temporary] svl015_formula_inline.xm
+
+"svl015_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "CHECK_SAFETY !BLOQUE" ] < true* . "LOG_EVENT !LOG_ALERTE" > true
+
+"systeme_irrigation_min.bcg" |= "svl015_formula_inline.mcl"
+
+verify_all.svl:132: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:131" -dfs   "svl015_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:131 -dfs svl015_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
+property P16
+ | P16 — Resolution de surete
+
+svl clean info: [temporary] svl016_formula_inline
+
+svl clean info: [temporary] svl016_formula_inline.mcl
+
+svl clean info: [temporary] svl016_formula_inline.xm
+
+"svl016_formula_inline.mcl" =
+    library standard.mcl end_library
+    [ true* . "RECV_BILAN !DR_DEPASSE" ] mu X . (< "CHECK_SAFETY !BLOQUE" > true or (< true > true and [ not "CHECK_SAFETY !BLOQUE" ] X))
+
+"systeme_irrigation_min.bcg" |= "svl016_formula_inline.mcl"
+
+verify_all.svl:141: warning: evaluator4 is deprecated, use evaluator instead
+
+svl clean info: [temporary] evaluator4
+
+svl clean info: [temporary] evaluator4.o
+
+% bcg_open   "systeme_irrigation_min.bcg"  evaluator4 -source "verify_all.svl:140" -dfs   "svl016_formula_inline.mcl"
+bcg_open: using ``/home/ikram/cadp/bin.x64/evaluator4.a''
+bcg_open: running ``evaluator4 -source verify_all.svl:140 -dfs svl016_formula_inline.mcl'' for ``./systeme_irrigation_min.bcg''
+
+TRUE
+command exit with status 0
+
+PASS
+
