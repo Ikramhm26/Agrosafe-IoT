@@ -1,0 +1,1 @@
+[ true* . "READ_TEMP !HAUTE" . (not "CHECK_SAFETY !AUTORISE")* . "CHECK_SAFETY !AUTORISE" ] false

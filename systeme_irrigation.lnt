@@ -1,0 +1,56 @@
+module systeme_irrigation
+    (types_agrosafe, environnement, acquisition,
+     taw_calc, decision, securite, actionneurs, journal) is
+
+process MAIN
+    [READ_SOL      : CH_SOL,
+     READ_CUVE     : CH_CUVE,
+     READ_TEMP     : CH_TEMP,
+     READ_PRESSION : CH_PRESSION,
+     READ_LORA     : CH_LORA,
+     READ_DELTA    : CH_CAPTEUR,
+     READ_PLUIE    : CH_PLUIE,
+     RECV_BILAN    : CH_BILAN,
+     EMIT_DECISION : CH_BILAN,
+     DECIDE        : CH_DECISION,
+     CHECK_SAFETY  : CH_SECURITE,
+     LOG_EVENT     : CH_LOG,
+     OPEN_VALVE    : NONE,
+     CLOSE_VALVE   : NONE,
+     PUMP_ON       : NONE,
+     PUMP_OFF      : NONE] is
+    par READ_SOL, READ_CUVE, READ_TEMP, READ_PRESSION,
+        READ_LORA, READ_DELTA, READ_PLUIE in
+        ENVIRONNEMENT [READ_SOL, READ_CUVE, READ_TEMP,
+                       READ_PRESSION, READ_LORA, READ_DELTA, READ_PLUIE]
+        ||
+        par RECV_BILAN in
+            ACQUISITION [READ_SOL, READ_CUVE, READ_TEMP,
+                         READ_PRESSION, READ_LORA, READ_DELTA,
+                         READ_PLUIE, RECV_BILAN]
+            ||
+            par EMIT_DECISION in
+                TAW_CALC [RECV_BILAN, EMIT_DECISION]
+                ||
+                par DECIDE in
+                    DECISION [EMIT_DECISION, DECIDE]
+                    ||
+                    par CHECK_SAFETY, LOG_EVENT in
+                        SECURITE [READ_SOL, READ_CUVE, READ_TEMP,
+                                  READ_PRESSION, READ_LORA, READ_DELTA,
+                                  READ_PLUIE, DECIDE, CHECK_SAFETY, LOG_EVENT]
+                        ||
+                        par LOG_EVENT in
+                            ACTIONNEURS [CHECK_SAFETY, OPEN_VALVE, CLOSE_VALVE,
+                                         PUMP_ON, PUMP_OFF, LOG_EVENT]
+                            ||
+                            JOURNAL [LOG_EVENT]
+                        end par
+                    end par
+                end par
+            end par
+        end par
+    end par
+end process
+
+end module

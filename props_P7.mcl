@@ -1,0 +1,1 @@
+[ true* . "READ_DELTA !DERIVE" . true* . "CHECK_SAFETY !AUTORISE" ] false

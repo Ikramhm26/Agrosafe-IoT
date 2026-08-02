@@ -1,0 +1,59 @@
+module securite (types_agrosafe) is
+
+process SECURITE
+    [READ_SOL      : CH_SOL,
+     READ_CUVE     : CH_CUVE,
+     READ_TEMP     : CH_TEMP,
+     READ_PRESSION : CH_PRESSION,
+     READ_LORA     : CH_LORA,
+     READ_DELTA    : CH_CAPTEUR,
+     READ_PLUIE    : CH_PLUIE,
+     DECIDE        : CH_DECISION,
+     CHECK_SAFETY  : CH_SECURITE,
+     LOG_EVENT     : CH_LOG] is
+
+var
+    sol      : EtatSol,
+    cuve     : EtatCuve,
+    temp     : EtatTemp,
+    pression : EtatPression,
+    lora     : EtatLoRa,
+    delta    : EtatCapteur,
+    pluie    : EtatPluie,
+    decision : DecisionIrrigation
+in
+loop
+    READ_SOL (?sol) ;
+    READ_CUVE (?cuve) ;
+    READ_TEMP (?temp) ;
+    READ_PRESSION (?pression) ;
+    READ_LORA (?lora) ;
+    READ_DELTA (?delta) ;
+    READ_PLUIE (?pluie) ;
+    DECIDE (?decision) ;
+
+    if (cuve == VIDE)
+    or (cuve == FUITE)
+    or (temp == HAUTE)
+    or (pression == FUITE_RESEAU)
+    or (lora == PERDU)
+    or (delta == DERIVE)
+    or (pluie == PLUIE)
+    then
+        CHECK_SAFETY (BLOQUE) ;
+        LOG_EVENT (LOG_ALERTE)
+    else
+        if decision == IRRIGUER then
+            CHECK_SAFETY (AUTORISE) ;
+            LOG_EVENT (LOG_OK)
+        else
+            CHECK_SAFETY (BLOQUE) ;
+            LOG_EVENT (LOG_OK)
+        end if
+    end if
+end loop
+end var
+
+end process
+
+end module

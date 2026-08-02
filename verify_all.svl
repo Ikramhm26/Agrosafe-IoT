@@ -1,0 +1,145 @@
+"systeme_irrigation_min.bcg" = "systeme_irrigation_min.bcg";
+
+property P1
+  "P1 — Pas irrigation si cuve vide"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_CUVE !VIDE" . true* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P2
+  "P2 — Pas irrigation si fuite cuve"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_CUVE !FUITE" . true* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P3
+  "P3 — Pas irrigation si temp haute"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_TEMP !HAUTE" . true* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P4
+  "P4 — Pas irrigation si pluie"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_PLUIE !PLUIE" . true* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P5
+  "P5 — Pas irrigation si fuite reseau"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_PRESSION !FUITE_RESEAU" . true* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P6
+  "P6 — Pas irrigation si LoRa perdu"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_LORA !PERDU" . true* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P7
+  "P7 — Pas irrigation si capteur derive"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_DELTA !DERIVE" . true* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P8
+  "P8 — Blocage immediat apres cuve vide"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_CUVE !VIDE" . (not "CHECK_SAFETY !AUTORISE")* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P9
+  "P9 — Blocage immediat apres temp haute"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_TEMP !HAUTE" . (not "CHECK_SAFETY !AUTORISE")* . "CHECK_SAFETY !AUTORISE" ] false;
+  expected TRUE
+end property
+
+property P10
+  "P10 — Absence de deadlock"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    nu X . (< true > true and [ true ] X);
+  expected TRUE
+end property
+
+property P11
+  "P11 — Sol normal permet irrigation"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_SOL !NORMAL" ] < true* . "DECIDE !IRRIGUER" > true;
+  expected TRUE
+end property
+
+property P12
+  "P12 — Sol critique permet irrigation"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "READ_SOL !CRITIQUE" ] < true* . "DECIDE !IRRIGUER" > true;
+  expected TRUE
+end property
+
+property P13
+  "P13 — DR depasse implique emission"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "RECV_BILAN !DR_DEPASSE" ] < true* . "EMIT_DECISION !DR_DEPASSE" > true;
+  expected TRUE
+end property
+
+property P14
+  "P14 — DR ok implique emission ok"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "RECV_BILAN !DR_OK" ] < true* . "EMIT_DECISION !DR_OK" > true;
+  expected TRUE
+end property
+
+property P15
+  "P15 — Bloque implique log alerte"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "CHECK_SAFETY !BLOQUE" ] < true* . "LOG_EVENT !LOG_ALERTE" > true;
+  expected TRUE
+end property
+
+property P16
+  "P16 — Resolution de surete"
+is
+  "systeme_irrigation_min.bcg" |= with evaluator4
+    library standard.mcl end_library
+    [ true* . "RECV_BILAN !DR_DEPASSE" ] mu X . (< "CHECK_SAFETY !BLOQUE" > true or (< true > true and [ not "CHECK_SAFETY !BLOQUE" ] X));
+  expected TRUE
+end property

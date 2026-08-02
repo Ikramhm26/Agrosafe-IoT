@@ -1,0 +1,18 @@
+module taw_calc (types_agrosafe) is
+
+process TAW_CALC
+    [RECV_BILAN    : CH_BILAN,
+     EMIT_DECISION : CH_BILAN] is
+
+var
+    bilan : EtatBilanHydrique
+in
+loop
+    RECV_BILAN (?bilan) ;
+    EMIT_DECISION (bilan)
+end loop
+end var
+
+end process
+
+end module

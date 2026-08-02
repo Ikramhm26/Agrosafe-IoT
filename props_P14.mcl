@@ -1,0 +1,1 @@
+[ true* . "RECV_BILAN !DR_OK" ] < true* . "EMIT_DECISION !DR_OK" > true

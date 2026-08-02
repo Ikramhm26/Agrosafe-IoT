@@ -1,0 +1,33 @@
+module actionneurs (types_agrosafe) is
+
+process ACTIONNEURS
+    [CHECK_SAFETY : CH_SECURITE,
+     OPEN_VALVE    : NONE,
+     CLOSE_VALVE   : NONE,
+     PUMP_ON       : NONE,
+     PUMP_OFF      : NONE,
+     LOG_EVENT    : CH_LOG] is
+
+var
+    securite : EtatSecurite
+in
+    CLOSE_VALVE ;
+    PUMP_OFF ;
+loop
+    CHECK_SAFETY (?securite) ;
+
+    if securite == AUTORISE then
+        OPEN_VALVE ;
+        PUMP_ON ;
+        LOG_EVENT (LOG_OK)
+    else
+        CLOSE_VALVE ;
+        PUMP_OFF ;
+        LOG_EVENT (LOG_ALERTE)
+    end if
+end loop
+end var
+
+end process
+
+end module

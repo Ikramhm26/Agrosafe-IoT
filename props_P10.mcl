@@ -1,0 +1,1 @@
+nu X . (< true > true and [ true ] X)

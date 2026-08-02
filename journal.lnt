@@ -1,0 +1,16 @@
+module journal (types_agrosafe) is
+
+process JOURNAL
+    [LOG_EVENT : CH_LOG] is
+
+var
+    evenement : EtatLog
+in
+loop
+    LOG_EVENT (?evenement)
+end loop
+end var
+
+end process
+
+end module

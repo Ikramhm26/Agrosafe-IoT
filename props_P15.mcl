@@ -1,0 +1,1 @@
+[ true* . "CHECK_SAFETY !BLOQUE" ] < true* . "LOG_EVENT !LOG_ALERTE" > true

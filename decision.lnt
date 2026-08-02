@@ -1,0 +1,26 @@
+module decision (types_agrosafe) is
+
+process DECISION
+    [EMIT_DECISION : CH_BILAN,
+     DECIDE        : CH_DECISION] is
+
+var
+    bilan    : EtatBilanHydrique,
+    decision : DecisionIrrigation
+in
+loop
+    EMIT_DECISION (?bilan) ;
+
+    if bilan == DR_DEPASSE then
+        decision := IRRIGUER
+    else
+        decision := ATTENDRE
+    end if ;
+
+    DECIDE (decision)
+end loop
+end var
+
+end process
+
+end module

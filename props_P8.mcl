@@ -1,0 +1,1 @@
+[ true* . "READ_CUVE !VIDE" . (not "CHECK_SAFETY !AUTORISE")* . "CHECK_SAFETY !AUTORISE" ] false

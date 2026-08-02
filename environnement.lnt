@@ -1,0 +1,22 @@
+module environnement (types_agrosafe) is
+
+process ENVIRONNEMENT
+    [READ_SOL      : CH_SOL,
+     READ_CUVE     : CH_CUVE,
+     READ_TEMP     : CH_TEMP,
+     READ_PRESSION : CH_PRESSION,
+     READ_LORA     : CH_LORA,
+     READ_DELTA    : CH_CAPTEUR,
+     READ_PLUIE    : CH_PLUIE] is
+loop
+    alt READ_SOL (NORMAL) [] READ_SOL (ALARME) [] READ_SOL (CRITIQUE) end alt ;
+    alt READ_CUVE (PLEINE) [] READ_CUVE (VIDE) [] READ_CUVE (FUITE) end alt ;
+    alt READ_TEMP (OK) [] READ_TEMP (HAUTE) end alt ;
+    alt READ_PRESSION (NORMALE) [] READ_PRESSION (FUITE_RESEAU) end alt ;
+    alt READ_LORA (OK) [] READ_LORA (PERDU) end alt ;
+    alt READ_DELTA (STABLE) [] READ_DELTA (DERIVE) end alt ;
+    alt READ_PLUIE (PLUIE) [] READ_PLUIE (SEC) end alt
+end loop
+end process
+
+end module

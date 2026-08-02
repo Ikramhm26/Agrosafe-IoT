@@ -1,0 +1,40 @@
+module types_agrosafe with == is
+
+type EtatSol is NORMAL, ALARME, CRITIQUE end type
+channel CH_SOL is (val : EtatSol) end channel
+
+type EtatCuve is PLEINE, VIDE, FUITE end type
+channel CH_CUVE is (val : EtatCuve) end channel
+
+type EtatTemp is OK, HAUTE end type
+channel CH_TEMP is (val : EtatTemp) end channel
+
+type EtatPression is NORMALE, FUITE_RESEAU end type
+channel CH_PRESSION is (val : EtatPression) end channel
+
+type EtatLoRa is OK, PERDU end type
+channel CH_LORA is (val : EtatLoRa) end channel
+
+type EtatCapteur is STABLE, DERIVE end type
+channel CH_CAPTEUR is (val : EtatCapteur) end channel
+
+type EtatPluie is PLUIE, SEC end type
+channel CH_PLUIE is (val : EtatPluie) end channel
+
+type EtatBilanHydrique is DR_OK, DR_DEPASSE end type
+channel CH_BILAN is (val : EtatBilanHydrique) end channel
+
+type DecisionIrrigation is IRRIGUER, ATTENDRE, BLOQUER end type
+channel CH_DECISION is (val : DecisionIrrigation) end channel
+
+type EtatSecurite is AUTORISE, BLOQUE end type
+channel CH_SECURITE is (val : EtatSecurite) end channel
+
+type EtatVanne is OUVERTE, FERMEE end type
+channel CH_VANNE is (val : EtatVanne) end channel
+
+type EtatLog is LOG_OK, LOG_ALERTE, LOG_ERREUR end type
+channel CH_LOG is (val : EtatLog) end channel
+
+channel CH_NONE is () end channel
+end module

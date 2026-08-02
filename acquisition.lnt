@@ -1,0 +1,47 @@
+module acquisition (types_agrosafe) is
+
+process ACQUISITION
+    [READ_SOL      : CH_SOL,
+     READ_CUVE     : CH_CUVE,
+     READ_TEMP     : CH_TEMP,
+     READ_PRESSION : CH_PRESSION,
+     READ_LORA     : CH_LORA,
+     READ_DELTA    : CH_CAPTEUR,
+     READ_PLUIE    : CH_PLUIE,
+     RECV_BILAN    : CH_BILAN] is
+
+var
+    sol      : EtatSol,
+    cuve     : EtatCuve,
+    temp     : EtatTemp,
+    pression : EtatPression,
+    lora     : EtatLoRa,
+    delta    : EtatCapteur,
+    pluie    : EtatPluie
+in
+loop
+    READ_SOL (?sol) ;
+    READ_CUVE (?cuve) ;
+    READ_TEMP (?temp) ;
+    READ_PRESSION (?pression) ;
+    READ_LORA (?lora) ;
+    READ_DELTA (?delta) ;
+    READ_PLUIE (?pluie) ;
+
+    if sol == CRITIQUE then
+        RECV_BILAN (DR_DEPASSE)
+    elsif (delta == STABLE) and (lora == OK) then
+        if sol == ALARME then
+            RECV_BILAN (DR_DEPASSE)
+        else
+            RECV_BILAN (DR_OK)
+        end if
+    else
+        RECV_BILAN (DR_DEPASSE)
+    end if
+end loop
+end var
+
+end process
+
+end module
